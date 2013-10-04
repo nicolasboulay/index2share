@@ -20,7 +20,7 @@ fi &&
 
 #testing
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    echo test...
-    cd test && ./rep.pl && cd ..
+#    echo test...
+#    cd test && ./rep.pl && cd ..
 fi
 
