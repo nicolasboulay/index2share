@@ -1,0 +1,5 @@
+source files
+
+echo unix build &&
+ocamlopt.opt unix.cmxa $files -o index &&
+strip -s index
