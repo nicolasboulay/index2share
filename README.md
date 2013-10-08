@@ -8,7 +8,6 @@ index, choose and copy files
 ## files
 
 *.ml ocaml file
-
 *.mli ocaml interface file
 
 make sh script to create binaries
