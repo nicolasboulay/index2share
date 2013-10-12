@@ -45,8 +45,9 @@ let option =
   let o = parse_argv Sys.argv in
   (** help line printed *)
   let s = (Filename.basename Sys.argv.(0)) ^ 
-    " V" ^ (string_of_int Version.release) ^
-    "_i" ^ (string_of_int Version.version) in
+    " V" ^ (string_of_int Version.major) ^
+    "." ^ (string_of_int Version.release) ^
+    "." ^ (string_of_int Version.version) in
   let _ = print_endline s in
   if o.help then 
     (print_endline 
