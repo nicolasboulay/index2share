@@ -1,5 +1,5 @@
 (*Version number, to be updated by a script, bug correction*)
-let version = 47
+let version = 48
 
 (*manual version*)
 (* minor number :backward compatible feature added*)

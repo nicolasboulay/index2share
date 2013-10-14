@@ -65,11 +65,9 @@ $r = `diff -r r1_copy r1 | tee test2.txt`;
 
 print "Complete recopy checking\n";
 `mkdir r2; cp -rp r1/list/* r2/ ; cd r2/; time ../../index`;
-$r = `diff -r r1 r2 | tee test3.txt`;
-print $r;
-&check($r, "7bfe7bc34fee85181113216bae360224bc385e2e");
-
-exit();
+#list is different in the second case, the 2nd path is added, that why list is excuded in the diff
+$r = `diff -r -x list r1 r2 | tee test3.txt`; 
+&check($r, "da39a3ee5e6b4b0d3255bfef95601890afd80709");
 
 print "Add external index into a list, nothing bad should happen, no copy";
 &create("r2",3);
@@ -87,7 +85,6 @@ print "Check the behavior of copy, and tentative of copy\n";
 `mkdir -p r2/r3; cp -rp r3/list/* r2/r3`;
 `mkdir -p r2/r4; cp -rp r4/list/* r2/r4`;
 `rm -rf r3`;
-# the filter is used to remove variability in speed that change the hash
-$r = `cd r2 ; time ../../index | perl -alne 's/jpg.*MiB//;print' | tee ../test5.txt; ls -R | tee ../test5a.txt`;
-#print $r;
-&check($r, "77996b84e59bdd0d687a6f7f02230494df877812");
+`cd r2 ; time ../../index | tee ../test5.txt`;
+$r = `ls -R | tee ../test5a.txt`;
+&check($r, "7214682623e5bd365a07cdde9cc8a4fff2dce7a9");
