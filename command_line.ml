@@ -53,7 +53,7 @@ let option =
     (print_endline 
       ("usage : " ^ (Filename.basename Sys.argv.(0)) ^ " [--lowmem] [root path]");
     print_endline
-    (o.root ^ "' file directory are read.\n" ^
+    ("'" ^ o.root ^ "' file directory are read.\n" ^
     "Index file listing 'list/' are created or updated.\n" ^
     "Index file not present in the 'list/' directory are replaced by the file they point to" ^ 
     " if possible.\n" ^
