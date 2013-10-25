@@ -1,4 +1,4 @@
-source files
+source ./files
 
 echo windows build &&
 ocamlopt.opt unix.cmxa $files -o index.exe &&
