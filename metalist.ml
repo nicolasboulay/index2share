@@ -25,12 +25,12 @@ let main () =
     with _ -> ()
   );
 
-  print_endline ( "The base directory is \'" ^ root_dir ^ "\'.\nThe directory \'" ^ list_dir ^ "\' will be the index directory.");
-(*  print_endline ( "index directory : " ^ list_dir );*)
+  print_endline ( "directory : \'" ^ root_dir ^ "\'");
+  print_endline ( " index directory : \'" ^ list_dir ^ "\'");
 
   (** Read the whole tree of root *)
   let (dir,n) = Dir.create root_dir in  
-  Printf.printf "%i files have been scanned.\n" n;
+  Printf.printf " %i files scanned\n" n;
   Dir.log dir ( Filename.concat ".." "dir_create.log" ) ;
 
   (** extraction of ./list from the rest *)  
@@ -44,23 +44,32 @@ let main () =
     save of the meta file inside ./list
     if the meta file exist, and have the same size, update it or do nothing
   *)
+  print_endline "Index directory management";
   let cp_file_list = 
     Process.write_list_meta_file list_dir root in
 
   Printf.printf 
-    "%i new index have been created in the index directory.\n%i have been updated.\n%i files are in base directory.\n" 
+    " %i new index\n %i index updated (path added)\n %i files in directory ( outside of index directory )\n" 
     !Meta.number_of_new_index !Meta.number_of_updated_index !Process.number_of_index;
 
-  Printf.printf "%i files to be copied in the base directory :\n" (List.length cp_file_list) ; 
+  let cp_size = Process.file_list_size cp_file_list in
+  let l = (List.length cp_file_list) in
+  print_endline "Size management";
+  Printf.printf " %i cop" l;
+  if  l != 0 
+  then 
+    (Printf.printf "ies to do (%s):\n" (Process.int64_to_humain_readable_byte cp_size)   )
+  else print_string "y to do\n";
 
   (*Replace all metafile outside of ./list by the real file using *~ as temporary name
     if the file does not exist add there size.
   *)
+  print_endline "Copy management";
   Process.write_cp_file_list cp_file_list;
 
   let end_time = Sys.time () in
 
-  Printf.printf "Elapsed time : %.2f s, since the begining.\n" (end_time -. start_time) 
+  Printf.printf "Elapsed time : %.2f s.\n" (end_time -. start_time) 
 
 let _ =  
   try 

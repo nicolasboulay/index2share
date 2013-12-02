@@ -109,7 +109,7 @@ let tick () =
   delta
 *)
 let cp_or_continue src dst =
-  print_string (Filename.basename src);
+  print_string (" " ^ (Filename.basename src));
   let tmp = dst ^ "~" in
   let length = 
     ( match 

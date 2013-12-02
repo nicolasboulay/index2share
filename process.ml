@@ -49,6 +49,16 @@ let int64_to_humain_readable_byte i =
   let r = Int64.to_float i in
   Printf.sprintf "%.2f MiB" (r /. (1024. *. 1024. )) 
 
+(* print the needed size what ever copy are or will be done*)
+let file_list_size file_list =
+  let rec f (acc:Int64.t) file_list =  
+      match file_list with
+        | [] -> acc
+        | (_, meta, _, _, _)::tl -> 
+            f ( Int64.add acc ( Meta.get_size meta ) ) tl
+  in
+  f 0L file_list
+
 (* Take a list of meta file with it's path,
    Try to find an existing file inside the path list
    Copy the file beside the metafile with filename~
@@ -70,7 +80,7 @@ let write_cp_file_list file_list =
             match org_path_list with
               | [] -> 
                   Log.output_endline log_cp ["  File not found "; "\n  "; (Meta.to_string meta)];
-                  print_endline ( "File not found " ^ (Meta.to_string meta) );
+                  print_endline ( " File not found " ^ (Meta.to_string meta) );
                   number_of_files_not_found := !number_of_files_not_found +1;
                   f ( Int64.add acc ( Meta.get_size meta ) ) tl
               | _ -> let org_path = List.hd org_path_list in
@@ -84,7 +94,6 @@ let write_cp_file_list file_list =
                      Log.output_endline log_cp 
                        ["  cp "; org_path; " "; path ; "# size ="; Int64.to_string( Meta.get_size meta )];
                      (
-                      
                        try                         
                          let size = Filecopy.cp_or_continue org_path path in
                          number_of_copied_files := !number_of_copied_files +1;
@@ -99,18 +108,15 @@ let write_cp_file_list file_list =
                            -> print_string (Unix.error_message e);
                              print_endline ( " with " ^ s1 ^ " " ^ s2)
                      );
-
                      f acc tl
   in
   let total_size = f 0L file_list in
-  Printf.printf "%i files have been effectively copied.\n" 
+  Printf.printf " %i copie(s) done, index updated\n" 
     !number_of_copied_files ;
   
-  print_endline (String.concat " " [
-    "There is";
-    Int64.to_string total_size;
-    "byte ("; int64_to_humain_readable_byte total_size;
-    ") of";
+  print_endline (String.concat " " [ "";
     string_of_int !number_of_files_not_found;
-    "unreplaced .idx file(s) by the original.";
+    "copies failed"; 
+    int64_to_humain_readable_byte total_size;
+    "missing" 
   ])
