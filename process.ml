@@ -111,8 +111,12 @@ let write_cp_file_list file_list =
                      f acc tl
   in
   let total_size = f 0L file_list in
-  Printf.printf " %i copie(s) done, index updated\n" 
-    !number_of_copied_files ;
+  if (!number_of_copied_files == 0) 
+  then
+    (print_endline " no copy done" ;)
+  else (
+    Printf.printf " %i copie(s) done, index updated\n" (!number_of_copied_files);     
+  );
   
   print_endline (String.concat " " [ "";
     string_of_int !number_of_files_not_found;

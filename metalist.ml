@@ -49,23 +49,25 @@ let main () =
     Process.write_list_meta_file list_dir root in
 
   Printf.printf 
-    " %i new index\n %i index updated (path added)\n %i files in directory ( outside of index directory )\n" 
+    " %i new index\n %i index updated (current .idx completed with new path)\n %i files in directory ( outside of index directory )\n" 
     !Meta.number_of_new_index !Meta.number_of_updated_index !Process.number_of_index;
 
   let cp_size = Process.file_list_size cp_file_list in
   let l = (List.length cp_file_list) in
   print_endline "Size management";
-  Printf.printf " %i cop" l;
-  if  l != 0 
+  (*Printf.printf " %i cop" l;*)
+  if  l == 0 
   then 
-    (Printf.printf "ies to do (%s):\n" (Process.int64_to_humain_readable_byte cp_size)   )
-  else print_string "y to do\n";
+    (print_string " no .idx outside of index directory, no copy to do\n";)    
+  else (
+    Printf.printf " %i copies to do (%s)\n" l (Process.int64_to_humain_readable_byte cp_size);
 
   (*Replace all metafile outside of ./list by the real file using *~ as temporary name
     if the file does not exist add there size.
   *)
-  print_endline "Copy management";
-  Process.write_cp_file_list cp_file_list;
+    print_endline "Copy management";
+    Process.write_cp_file_list cp_file_list;
+  );
 
   let end_time = Sys.time () in
 
