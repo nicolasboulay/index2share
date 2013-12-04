@@ -44,23 +44,37 @@ let main () =
     save of the meta file inside ./list
     if the meta file exist, and have the same size, update it or do nothing
   *)
-  print_endline "Index directory management";
+  print_endline "Index generation";
   let cp_file_list = 
     Process.write_list_meta_file list_dir root in
 
-  Printf.printf 
-    " %i new index\n %i index updated (current .idx completed with new path)\n %i files in directory ( outside of index directory )\n" 
-    !Meta.number_of_new_index !Meta.number_of_updated_index !Process.number_of_index;
+  Printf.printf " %i new index\n" !Meta.number_of_new_index;
+  if (0 != !Meta.number_of_updated_index) then 
+    Printf.printf " %i index updated (current .idx completed with new path)\n" !Meta.number_of_updated_index;
+  Printf.printf " %i files in directory ( outside of index directory )\n" !Process.number_of_index;
+
+  (*Counting .idx file in list*)
+  (*let counting_idx dir =
+    let index_number = ref 0 in
+    let (new_lst,_) = Dir.create dir in  
+    let f filename size = 
+      if ( Meta.is_dot_idx_filename filename) then
+        index_number := !index_number +1;
+      None
+    in
+    let _ = Dir.map_some_file_list f new_lst in  
+    !index_number
+  in*)
 
   let cp_size = Process.file_list_size cp_file_list in
   let l = (List.length cp_file_list) in
-  print_endline "Size management";
+  print_endline "Chosen files";
   (*Printf.printf " %i cop" l;*)
   if  l == 0 
   then 
     (print_string " no .idx outside of index directory, no copy to do\n";)    
   else (
-    Printf.printf " %i copies to do (%s)\n" l (Process.int64_to_humain_readable_byte cp_size);
+    Printf.printf " %i chosed files : %s\n" l (Process.int64_to_humain_readable_byte cp_size);
 
   (*Replace all metafile outside of ./list by the real file using *~ as temporary name
     if the file does not exist add there size.
@@ -68,6 +82,11 @@ let main () =
     print_endline "Copy management";
     Process.write_cp_file_list cp_file_list;
   );
+
+  (*size of ./list*)
+  let index_number = Process.counting_idx list_dir in
+  Printf.printf "Index directory management\n %i .idx in index directory\n" index_number;
+
 
   let end_time = Sys.time () in
 

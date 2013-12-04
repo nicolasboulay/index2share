@@ -140,11 +140,17 @@ let golden_value = magic_number
 let golden_value_length = String.length golden_value
 let buf = String.create golden_value_length 
 
-let read filename =
-  try  
+let is_dot_idx_filename filename =
     let l = String.length filename in
     let s = filename in
-    if ( s.[l-3] = 'i' & s.[l-2] = 'd' & s.[l-1] = 'x' ) then (
+    s.[l-3] = 'i' & s.[l-2] = 'd' & s.[l-1] = 'x' 
+
+let read filename =
+  try  
+    (*let l = String.length filename in
+    let s = filename in
+    if ( s.[l-3] = 'i' & s.[l-2] = 'd' & s.[l-1] = 'x' ) then ( *)
+    if ( is_dot_idx_filename filename) then (
       let ic = open_in filename in
       really_input ic buf 0 golden_value_length;
       if buf = golden_value then 

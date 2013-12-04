@@ -3,6 +3,7 @@ type t = {
   trace: bool; (** trace*)
   help: bool; 
   lowmem: bool; 
+  neutral: bool;
   root: string;
 }
 
@@ -11,6 +12,7 @@ let option_default = try {
   trace = false;
   help = false;
   lowmem = false;
+  neutral = false;
   root = Unix.getcwd();
 } with Unix.Unix_error(e,s1,s2) 
     -> print_string (Unix.error_message e);
@@ -29,6 +31,7 @@ let parse_argv argv0 =
     | "--help"::tl | "-h"::tl -> 
           parse_ { option with help = true } tl    
     | "--trace"::tl -> parse_ { option with trace = true } tl    
+    | "-n"::tl -> parse_ { option with neutral = true } tl    
     | "--lowmem"::tl ->   
         parse_ { option with lowmem = true } tl    
     | "--"::dir::tl -> parse_ { option with root = dir } tl    

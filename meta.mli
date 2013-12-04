@@ -16,3 +16,4 @@ val write : t -> string -> unit
 
 val number_of_new_index : int ref
 val number_of_updated_index : int ref
+val is_dot_idx_filename: string -> bool

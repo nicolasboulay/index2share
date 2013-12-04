@@ -124,3 +124,15 @@ let write_cp_file_list file_list =
     int64_to_humain_readable_byte total_size;
     "missing" 
   ])
+
+(*to count .idx file in a dir *)
+let counting_idx dir =
+    let index_number = ref 0 in
+    let (new_lst,_) = Dir.create dir in  
+    let f filename size = 
+      if ( Meta.is_dot_idx_filename filename) then
+        index_number := !index_number +1;
+      None
+    in
+    let _ = Dir.map_some_file_list f new_lst in  
+    !index_number
