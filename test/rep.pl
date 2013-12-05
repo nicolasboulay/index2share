@@ -86,5 +86,6 @@ print "Check the behavior of copy, and tentative of copy\n";
 `mkdir -p r2/r4; cp -rp r4/list/* r2/r4`;
 `rm -rf r3`;
 `cd r2 ; time ../../index | tee ../test5.txt`;
-$r = `ls -R | tee ../test5a.txt`;
-&check($r, "7214682623e5bd365a07cdde9cc8a4fff2dce7a9");
+$r = `ls -R r2`;
+
+&check($r, "9bcfd016fb8304973a0f09db5c9604fc16607281");
