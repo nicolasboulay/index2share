@@ -21,7 +21,9 @@ let main () =
 
   (** ./list creation if needed *)
   ( try
-      Unix.mkdir list_dir 0o744
+      if not Command_line.option.Command_line.neutral then (
+        Unix.mkdir list_dir 0o744
+      )
     with _ -> ()
   );
 
@@ -76,9 +78,9 @@ let main () =
   else (
     Printf.printf " %i chosed files : %s\n" l (Process.int64_to_humain_readable_byte cp_size);
 
-  (*Replace all metafile outside of ./list by the real file using *~ as temporary name
-    if the file does not exist add there size.
-  *)
+    (*Replace all metafile outside of ./list by the real file using *~ as temporary name
+      if the file does not exist add there size.
+    *)
     print_endline "Copy management";
     Process.write_cp_file_list cp_file_list;
   );
@@ -93,7 +95,7 @@ let main () =
   Printf.printf "Elapsed time : %.2f s.\n" (end_time -. start_time) 
 
 let _ =  
-  try 
+  try
     main ()
   with Unix.Unix_error(e,s1,s2) 
       -> print_string (Unix.error_message e);

@@ -119,23 +119,24 @@ int mkpath(const char *path, mode_t mode)
 (* like mkdir -p create all subdirectory if needed*)
 let zero =  char_of_int 0
 let mkdirp path =
-  let s = String.copy path in
-  let rec f j =
+  if not Command_line.option.Command_line.neutral then (
+    let s = String.copy path in
+    let rec f j =
+      try
+        let i = String.index_from s j (Filename.dir_sep).[0] in
+        s.[i] <- zero;
+        let _ = 
+          try      
+            Unix.mkdir s 0o777;
+          with _ -> () in
+        s.[i] <- (Filename.dir_sep).[0];
+        f (i+1)
+      with Not_found -> Unix.mkdir s 0o777
+    in       
     try
-      let i = String.index_from s j (Filename.dir_sep).[0] in
-      s.[i] <- zero;
-      let _ = 
-        try      
-          Unix.mkdir s 0o777;
-        with _ -> () in
-      s.[i] <- (Filename.dir_sep).[0];
-      f (i+1)
-    with Not_found -> Unix.mkdir s 0o777
-  in       
-  try
-    f 0
-  with _ -> ()
-
+      f 0
+    with _ -> ()
+  )
 (*
 let _ = Unix.handle_unix_error ( Unix.mkdir s ) 0o750 in
 ()

@@ -109,7 +109,6 @@ let tick () =
   delta
 *)
 let cp_or_continue src dst =
-  print_string (" " ^ (Filename.basename src));
   let tmp = dst ^ "~" in
   let length = 
     ( match 
@@ -122,11 +121,11 @@ let cp_or_continue src dst =
     ) in
   (try Sys.remove dst with _ -> () (*mandatoy under windows*));
   Sys.rename tmp dst;
-  (*let delta = tick () in
-  (if delta = 0. then 
-    Printf.printf " (a lot of) MiB/s\n" 
-  else
-    Printf.printf " %.2f MiB/s\n" ((Int64.to_float length) /. delta /. (1024. *. 1024. ))
-  );*)
-  print_newline ();
+    (*let delta = tick () in
+      (if delta = 0. then 
+      Printf.printf " (a lot of) MiB/s\n" 
+      else
+      Printf.printf " %.2f MiB/s\n" ((Int64.to_float length) /. delta /. (1024. *. 1024. ))
+      );*)
   length
+

@@ -24,7 +24,9 @@ let create_write_metafile_r rootpath file_relpath size list_path =
       | Meta.Meta meta_value -> 
           Log.output_endline log_metafiles ["regular file : " ; pathfile];
           Log.output_endline log_metafiles ["  " ; Meta.to_string meta_value];  
-          Meta.write_or_update meta_value path_metafile ; None
+          if not Command_line.option.Command_line.neutral then (
+            Meta.write_or_update meta_value path_metafile ); 
+          None
 
 (*
   Take a full directory dir, and tranform it in metafile wrote into list_path
@@ -95,15 +97,19 @@ let write_cp_file_list file_list =
                        ["  cp "; org_path; " "; path ; "# size ="; Int64.to_string( Meta.get_size meta )];
                      (
                        try                         
-                         let size = Filecopy.cp_or_continue org_path path in
                          number_of_copied_files := !number_of_copied_files +1;
-                           (*create metafile into ./list*)
-                         let metafile_listpath = list_path ^ file_relpath in
-                         let alone = Meta.create size [path] in 
-                         let new_meta = Meta.merge_update meta alone in
-                         Meta.write new_meta metafile_listpath;
+                         print_string (" " ^ (Filename.basename org_path));
+                         if not Command_line.option.Command_line.neutral then (
+                           let size = Filecopy.cp_or_continue org_path path in
+                         (*create metafile into ./list*)
+                           let metafile_listpath = list_path ^ file_relpath in
+                           let alone = Meta.create size [path] in 
+                           let new_meta = Meta.merge_update meta alone in
+                           Meta.write new_meta metafile_listpath;
                          (*remove the metafile from the normal dir*)
-                         (try Sys.remove metafile_path with _ -> ()); 
+                           (try Sys.remove metafile_path with _ -> ()); 
+                         );
+                           print_newline ();
                        with Unix.Unix_error(e,s1,s2) 
                            -> print_string (Unix.error_message e);
                              print_endline ( " with " ^ s1 ^ " " ^ s2)
@@ -117,18 +123,20 @@ let write_cp_file_list file_list =
   else (
     Printf.printf " %i copie(s) done, index updated\n" (!number_of_copied_files);     
   );
-  
-  print_endline (String.concat " " [ "";
-    string_of_int !number_of_files_not_found;
-    "copies failed"; 
-    int64_to_humain_readable_byte total_size;
-    "missing" 
-  ])
+  if (0 != !number_of_files_not_found) then
+    ( print_endline (String.concat " " [ "";
+                                       string_of_int !number_of_files_not_found;
+                                       "copies failed"; 
+                                       int64_to_humain_readable_byte total_size;
+                                       "missing" 
+                                     ])
+    )
 
 (*to count .idx file in a dir *)
 let counting_idx dir =
+  try
     let index_number = ref 0 in
-    let (new_lst,_) = Dir.create dir in  
+    let (new_lst,_) = Dir.create_dir dir in  
     let f filename size = 
       if ( Meta.is_dot_idx_filename filename) then
         index_number := !index_number +1;
@@ -136,3 +144,4 @@ let counting_idx dir =
     in
     let _ = Dir.map_some_file_list f new_lst in  
     !index_number
+  with _ -> 0
