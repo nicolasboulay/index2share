@@ -56,12 +56,12 @@ let option =
     (print_endline 
       ("usage : " ^ (Filename.basename Sys.argv.(0)) ^ " [--lowmem] [root path]");
     print_endline
-    ("'" ^ o.root ^ "' file directory are read.\n" ^
-    "Index file listing 'list/' are created or updated.\n" ^
-    "Index file not present in the 'list/' directory are replaced by the file they point to" ^ 
+    ("'" ^ o.root ^ "' file directory is read.\n" ^
+    ".idx file directory 'list/' are created or updated.\n" ^
+    ".idx file not present in the 'list/' directory are replaced by the file they point to" ^ 
     " if possible.\n" ^
-    "The size of none replaced index file are printed.\n" ^
-    "The indexes should be copied, with this executable."); 
+    "The size of none replaced .idx file are printed.\n" ^
+    "The .idx files should be copied, with this executable."); 
     exit 0)
   else o
 
