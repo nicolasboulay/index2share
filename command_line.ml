@@ -54,10 +54,11 @@ let option =
   let _ = print_endline s in
   if o.help then 
     (print_endline 
-      ("usage : " ^ (Filename.basename Sys.argv.(0)) ^ " [--lowmem] [root path]");
+      ("usage : " ^ (Filename.basename Sys.argv.(0)) ^ " [--lowmem] [-n] [root path]");
     print_endline
-    ("'" ^ o.root ^ "' file directory is read.\n" ^
-    ".idx file directory 'list/' are created or updated.\n" ^
+    ( "-n : blank run, nothing modified" ^
+      "'" ^ o.root ^ "' file directory is read.\n" ^
+      ".idx file directory 'list/' are created or updated.\n" ^
     ".idx file not present in the 'list/' directory are replaced by the file they point to" ^ 
     " if possible.\n" ^
     "The size of none replaced .idx file are printed.\n" ^
