@@ -4,6 +4,7 @@ type t = {
   help: bool; 
   lowmem: bool; 
   neutral: bool;
+  verbose: bool;
   root: string;
 }
 
@@ -13,6 +14,7 @@ let option_default = try {
   help = false;
   lowmem = false;
   neutral = false;
+  verbose = false;
   root = Unix.getcwd();
 } with Unix.Unix_error(e,s1,s2) 
     -> print_string (Unix.error_message e);
@@ -32,6 +34,7 @@ let parse_argv argv0 =
           parse_ { option with help = true } tl    
     | "--trace"::tl -> parse_ { option with trace = true } tl    
     | "-n"::tl -> parse_ { option with neutral = true } tl    
+    | "-v"::tl -> parse_ { option with verbose = true } tl    
     | "--lowmem"::tl ->   
         parse_ { option with lowmem = true } tl    
     | "--"::dir::tl -> parse_ { option with root = dir } tl    
@@ -56,13 +59,12 @@ let option =
     (print_endline 
       ("usage : " ^ (Filename.basename Sys.argv.(0)) ^ " [--lowmem] [-n] [root path]");
     print_endline
-    ( "-n : blank run, nothing modified" ^
-      "'" ^ o.root ^ "' file directory is read.\n" ^
-      ".idx file directory 'list/' are created or updated.\n" ^
-    ".idx file not present in the 'list/' directory are replaced by the file they point to" ^ 
+    ( "-n : blank run, nothing modified\n" ^
+      "'" ^ o.root ^ "' file directory will be indexed.\n" ^
+      ".idx file directory 'list/' will be created or updated.\n" ^
+    ".idx file not present in the 'list/' directory are replaced by the file they point to," ^ 
     " if possible.\n" ^
-    "The size of none replaced .idx file are printed.\n" ^
-    "The .idx files should be copied, with this executable."); 
+    "The size of none replaced .idx file are printed."); 
     exit 0)
   else o
 
