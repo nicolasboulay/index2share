@@ -69,7 +69,7 @@ let file_exists p =
     (*Sys.file_exists does not work for file > 2GB !*)
     Unix.access p [Unix.F_OK;Unix.R_OK];
     true
-  with Unix.Unix_error _ -> false
+  with _ -> false
       
 let check_file path =
   let l = rewrite_file [] path in
