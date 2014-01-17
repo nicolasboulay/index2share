@@ -23,8 +23,8 @@ let option_default = try {
 
 let print t =
   match t.trace with
-    | true -> print_endline ("index --trace " ^ t.root)
-    | false -> print_endline ("index " ^ t.root)
+    | true -> print_endline ("index2share --trace " ^ t.root)
+    | false -> print_endline ("index2share " ^ t.root)
 
 let parse_argv argv0 =
   let argv0_list = Array.to_list argv0 in

@@ -1,5 +1,5 @@
 source files
 
 echo unix build &&
-ocamlopt.opt unix.cmxa $files -o index &&
-strip -s index
+ocamlopt.opt unix.cmxa $files -o index2share &&
+strip -s index2share
