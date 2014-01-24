@@ -1,8 +1,11 @@
+	INDEX2SHARE
 
-	INDEX
+Index2share is a tool that manages a 2 steps file copy. First, it create tiny file to represent bigger files. User moves 
+this tiny files as if it were the bigger one, it's much faster than moving the orignal file.
 
-Index is a tool that manages file copy, using 2 steps. It reads a directory, and creates a list of index files in it. 
-This index file could be copied inside some other directory. Index program will replace it after a run by the original.
+Then the tiny file are replace by the bigger one in a batch.
+
+The tiny files could be given as list of files of interest.
 
 There is no internet/network comunication.
 
