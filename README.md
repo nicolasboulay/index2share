@@ -1,4 +1,4 @@
-index
+index2share
 =====
 
 index, choose and copy files
@@ -7,7 +7,7 @@ index, choose and copy files
 
 ## Goals
 
-index is a tool, to manage and copies files. 
+index2share is a tool, to manage and copies files. 
 The tools create index file. This copy management are done 
 though a file navigator, and moving index files. Then the index are
 replace by the tool by the original file.
