@@ -1,2 +1,2 @@
-.\linux\bin\index.exe ..\..
+.\win\bin\index.exe ..\..
 pause
