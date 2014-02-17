@@ -1,2 +1,2 @@
-.\win\bin\index.exe ..\..
+.\win\bin\index2share.exe ..\..
 pause
