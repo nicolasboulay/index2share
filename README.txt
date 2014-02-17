@@ -1,6 +1,7 @@
 	INDEX2SHARE
 
-Index2share is a tool that manages a 2 steps file copy. First, it create tiny file to represent bigger files. User moves 
+Index2share is a tool that manages a 2 steps file copy. 
+First, it create tiny file to represent bigger files. User moves 
 this tiny files as if it were the bigger one, it's much faster than moving the orignal file.
 
 Then the tiny file are replace by the bigger one in a batch.
@@ -17,7 +18,7 @@ When run by double clicking on runme.bat, the program will run on the removable 
 The content of the ./index_/ directory should be also copied, to have some information to check if the binaries 
 have been modified, to avoid malware.
 
-MANIFEST
+MANIFEST of compressed archive
 
 ./index Linux executable
 ./index.exe Windows 32 bits executable
