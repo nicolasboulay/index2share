@@ -1,5 +1,5 @@
 source ./files
 
 echo windows build &&
-ocamlopt.opt unix.cmxa $files -o index2share.exe &&
-strip -s index.exe
+ocamlopt.opt -g unix.cmxa $files -o index2share.exe &&
+strip -s index2share.exe

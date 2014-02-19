@@ -95,8 +95,9 @@ let main () =
   Printf.printf "Elapsed time : %.2f s.\n" (end_time -. start_time) 
 
 let _ =  
-  try
+  (*try*)
     main ()
-  with Unix.Unix_error(e,s1,s2) 
+  (*with Unix.Unix_error(e,s1,s2) 
       -> print_string (Unix.error_message e);
         print_endline ( " with " ^ s1 ^ " " ^ s2)
+*)	
