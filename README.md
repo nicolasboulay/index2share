@@ -17,9 +17,8 @@ Then the tiny file are replaced by the bigger one in a batch.
 The tiny files could be given to another user, as list of files of interest.
 
 There is no internet/network communication. It has almost no command line options.
-![alt
-text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png
-"Logo Title Text 1")
+![Doc](https://github.com/nicolasboulay/index2share/raw/master/i2s.jpg
+"before and after an index2share run")
 
 ## GUI under windows
 
