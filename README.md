@@ -72,9 +72,9 @@ The working directory, by default is ".".
 ##Example
 ###WINDOWS EXAMPLE
 
-Alice has many usb keys with many files on it. Bob wants some of these files, but Alice cannot give her keys to Bob. 
-Index program will create .idx file to enable Bob to choose files with the file explorer. Then Alice will re-run 
-index program, to finish a copie.
+Alice has many USB keys with many files on it. Bob wants some of these files, but Alice cannot give her keys to Bob. 
+Index2share program will create .idx file to enable Bob to choose files, with the file explorer. Then Alice will re-run 
+index2share program, to finish the copies.
 
 * Alice copies all the files of the install in the base of each removable drive, ( example, e:\).
 * Alice double clics on e:\index2share\runme.bat. 
@@ -82,37 +82,36 @@ index program, to finish a copie.
   .idx file contains the path of the real file.
 * Alice copy the e:\list\ in its document directory.
 * Alice remove the removable drive, Alice do the previous steps for every usb key.
-* Alice gives all .\list directories to Bob, written in an usb key, in e:\list\.
-* Bob copies the index program files, in an empty usb key.
-* Bob copies the few .idx files, in the usb key. Bob could move and organize .idx file as if it was the real file.
-* Bob double clics on e:\runme.bat.
-  .idx file are recognized, original files are not found (it's normal, the files are not present),
-  the total sized necessary is displayed. Bob checks, if its usb key will have enough free space.
+* Alice gives all .\list directories to Bob, written in an other usb key, in e:\list\.
+* Bob copies the index2share program files, in an empty usb key.
+* Bob copies the few .idx files, in the usb key, he want. Bob could move and organize .idx file _as if it was the real file._
+* Bob double clics on  e:\index2share\runme.bat.
+  .idx file are recognized, original files are not found (it's normal, the original files are owned by Alice),
+  the total sized necessary is displayed. Bob checks, if its USB key will have enough free space.
 * Blob gives its key to Alice.
-* Alice plugs her usb keys and the Bob's key (in e:\).
-* Alice double clics on e:\runme.bat, the .idx file will be replaced by the original file from the keys.
-* Alice gives back his key to Bob.
+* Alice plugs her usb keys (new letter assignement is not a problem) and the Bob's key (in e:\ for example).
+* Alice double clics on e:\index2share\runme.bat, the .idx file will be replaced by the original file from the keys.
+* Alice gives back his now full USB key to Bob.
 
 ###LINUX EXAMPLE
 
-Some Linux distribution removes execution right from removable drive, for security reasons. In that cases, the use of the program will  
-use the directory as option.
+Some Linux distribution removes execution right from removable drive, for security reasons. In that cases, the use of the program will use the directory as option.
 
 * Alice copies all the files of the install in a removable disk (for example in /media/CORSAIR16G/)
-* Alice copies all the files of the install in an executable directory
+* Alice copies also all the files of the install in an executable directory
 * [Alice] $ index2share /media/CORSAIR16G/
-  44 new index have been created in the index directory.
+  44 new index have been created in the /media/CORSAIR16G/list/ directory.
 * [Alice] $ cp /media/CORSAIR16G/list/* ~/idx/
 * [Alice] $ tar -cvzf idx.tar.gz ~/idx
 * idx.tar.gz is given to Bob.
 * [Bob] $ cp plop.txt.idx /mnt/SONY4G/
 * [Bob] $ index2share /mnt/SONY4G/
   There is 64419 byte ( 0.06 MiB ) of 1 unreplaced .idx file(s) by the original.
-* Bob gives his key to Alice, and Alice run index :
+* Bob gives his key to Alice, and Alice run index2share :
 * [Alice] $ index2share /mnt/SONY4G/
   plop.txt 20.48 MiB/s
   1 files have been effectively copied.
-* Alice gives back, his key to Bob.
+* Alice gives back, his USB key to Bob.
 
 ## Inside
 
@@ -122,13 +121,13 @@ The .ifx file contains a 4 kinds of elements, each elements are separate line by
 
 * "IndexFile" a 'magic' string
 * A file version number to identify this format ("1")
-* file size in byte
-* A list of absolute path, one by line
+* original file size in byte
+* A list of absolute path, one by line, used as link
 
 ###PERFORMANCE
 
 The program is fast but use lot of memory. It could index 30 000 files
-in less than 3s, using around 250MB. 
+in less than 3s, using around 250MB of RAM. 
 When a file is copied, the limit is the slower drive. Usb key could be
 slow. 
 For each file, the directory have been explored, the size of file is taken, an .idx 
@@ -140,11 +139,10 @@ file is created or updated.
 * *.ml ocaml file
 * *.mli ocaml interface file
 * make* sh script to create binaries
-* version.pl perl script to update build version 
+* version.pl perl script to update minor build version number
 * build.sh sh script to make a release
-* README.txt the end user "manual"
+* README.md the end user "manual"
 * runme.bat batch script for windows execution to see console output
-
 
 #### tool Dependancies
 
