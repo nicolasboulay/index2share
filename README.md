@@ -7,7 +7,7 @@ index, choose and copy files
 
 ## Goals
 
-Index2share is a tool that manages a 2 steps file copy, using index.
+Index2share is a tool that manages a 2 steps file copy, using index list.
  
 First, it create tiny files to represent the bigger files. User moves and sort 
 this tiny files, as if it were the bigger one, but it's much faster than moving the orignal file.
