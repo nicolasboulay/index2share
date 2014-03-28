@@ -17,6 +17,11 @@ Then the tiny file are replaced by the bigger one in a batch.
 The tiny files could be given to another user, as list of files of interest.
 
 There is no internet/network communication. It has almost no command line options.
+
+##A quick look 
+
+idx file are link to normal file. "base/" are the base directory where the executable is launch. base/list/ are special directory compare to other place.
+
 ![Doc](https://github.com/nicolasboulay/index2share/raw/master/i2s.jpg
 "before and after an index2share run")
 
