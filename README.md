@@ -43,6 +43,7 @@ The content of the ./index_/ directory should be also copied, to have some infor
 have been modified, to avoid malware.
 
 ##MANIFEST of compressed archive
+index2share.zip index2share.tar.gz and index2share.tar.xz
 
     <root to index> 
     └── index2share
