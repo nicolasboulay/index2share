@@ -44,23 +44,24 @@ have been modified, to avoid malware.
 
 ##MANIFEST of compressed archive
 
-<root to index> 
-└── index2share
-    ├── doc
-    │   └── README.md # this file
-    ├── linux
-    │   ├── bin
-    │   │   └── index2share # Linux 32 bit executable
-    │   └── sum # hash for integrity checking
-    │       ├── index2share.sha1
-    │       └── index2share.sha512
-    ├── runme.bat # Windows batch file that launch index2share.exe then a pause, to be able to read the output of the program
-    └── win
-        ├── bin
-        │   └── index2share.exe # Windows 32 bits executable
-        └── sum # hash for integrity checking
-            ├── index2share.exe.sha1
-            └── index2share.exe.sha512
+    <root to index> 
+    └── index2share
+     ├── doc
+     │   └── README.md # this file
+     ├── linux
+     │   ├── bin
+     │   │   └── index2share # Linux 32 bit executable
+     │   └── sum # hash for integrity checking
+     │       ├── index2share.sha1
+     │       └── index2share.sha512
+     ├── runme.bat # Windows batch file that launch index2share.exe then a pause, to read the output of the program
+     └── win
+         ├── bin
+         │   └── index2share.exe # Windows 32 bits executable
+         └── sum # hash for integrity checking
+             ├── index2share.exe.sha1
+             └── index2share.exe.sha512
+
 
 ##OPTIONS
 
