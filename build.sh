@@ -23,6 +23,7 @@ cp -rp index2share build/index2share/linux/bin/ &&
 cp -rp index2share.exe build/index2share/win/bin/ &&
 cp -rp runme.bat build/index2share/ &&
 cp -rp README.md build/index2share/doc/ &&
+cp -rp i2s.jpg build/index2share/doc/ &&
 cd build/ &&
 sha512sum ./index2share/linux/bin/index2share > ./index2share/linux/sum/index2share.sha512 &&
 sha1sum   ./index2share/linux/bin/index2share > ./index2share/linux/sum/index2share.sha1 &&
