@@ -120,9 +120,9 @@ let cp_or_continue src dst =
         | true -> continue src tmp
     ) in
   (try 
-    Sys.remove dst  (*mandatoy under windows*)
-  with _ -> ( Printf.printf "\n%s can't be replaced." dst; (*could failed if dst is a repository*) 
-	      exit 1;)
+    Unix.handle_unix_error Sys.remove dst  (*mandatoy under windows*)
+  with _ -> ( Printf.printf "\n%s can't be replaced.\n" dst; (*could failed if dst is a repository*) 
+	    ) (*exit 1 removed because it could failed under linux because of file right*)
   );
   Sys.rename tmp dst;
     (*let delta = tick () in
