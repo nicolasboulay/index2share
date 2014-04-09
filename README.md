@@ -68,8 +68,8 @@ index2share.zip index2share.tar.gz and index2share.tar.xz
 
 The working directory, by default is ".".
 
-[--lowmem] enable to use no garbage collection tweaking : slower (-15%) but use less memory (/8).
-[-n] no modification flag 
+* [--lowmem] enable to use no garbage collection tweaking : slower (-15%) but use less memory (/8).
+* [-n] no modification flag 
 
 ##Example
 ###WINDOWS EXAMPLE
