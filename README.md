@@ -76,7 +76,7 @@ The working directory, by default is ".".
 
 Alice has many USB keys with many files on it and wants to share her collection of files with Bob. Bob wants some of these files, but Alice cannot give her keys to Bob. 
 Instead of sharing her USB keys one by one, she runs index2share, to index her whole collection. The result is a set of light index files (.idx files), that can be easily centralized on a storage device, or sent by email (as they are ligthweight). Bob can thus browse Alices files collection, through the set of index (by using his file explorer).
-Bob give a tree of .idx file to Alice on a USB key. Alice plug the key, and it's own keys, run index2share on the Bob file tree..The program will replace the .idx file, by the original file.
+Bob give a tree of .idx file to Alice on a USB key. Alice plug the key, and it's own keys, run index2share on the Bob file tree.The program will replace the .idx file, by the original file.
 
 * Alice copies all the files of the install in the base of each removable drive, ( example, e:\).
 * Alice double clics on e:\index2share\runme.bat. 
