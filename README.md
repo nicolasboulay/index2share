@@ -22,7 +22,7 @@ There is no internet/network communication. It has almost no command line option
 
 idx file are link to normal file. "base/" are the base directory where the executable is launch. base/list/ are special directory compare to other place.
 
-![Doc](https://github.com/nicolasboulay/index2share/raw/master/i2s.jpg
+![Doc](https://github.com/nicolasboulay/index2share/raw/master/src/i2s.jpg
 "before and after an index2share run")
 
 ## GUI under windows
